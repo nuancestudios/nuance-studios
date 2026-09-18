@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-bg: #fff;
+  --c-text: #111;
+  --r: 12px;
+  --density: 1;
+  --scale: 1;
+  color-scheme: light;
+}
+
+html[data-mode='dark'] { color-scheme: dark; }
+
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+  background: var(--c-bg);
+  color: var(--c-text);
+  transition: background-color .5s cubic-bezier(.22,1,.36,1), color .5s cubic-bezier(.22,1,.36,1);
+  overflow-x: hidden;
+}
+
+::selection { background: var(--c-accent); color: var(--c-on-accent); }
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--c-surface-2); }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--c-accent) 55%, var(--c-muted));
+  border-radius: 999px;
+  border: 2px solid var(--c-surface-2);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--c-accent); }
+
+/* ── Type primitives ───────────────────────────────────── */
+.nu-display {
+  font-family: var(--f-display);
+  font-weight: var(--fw-display);
+  letter-spacing: var(--tr-display);
+  line-height: var(--lh-display);
+  text-transform: var(--tt);
+}
+.nu-body { font-family: var(--f-body); font-weight: var(--fw-body); line-height: var(--lh-body); }
+
+.nu-h1 { font-size: clamp(2.6rem, calc(7.5vw * var(--scale)), 8.5rem); }
+.nu-h2 { font-size: clamp(1.9rem, calc(4.4vw * var(--scale)), 4.6rem); }
+.nu-h3 { font-size: clamp(1.25rem, calc(2.1vw * var(--scale)), 2.1rem); }
+.nu-lead { font-size: clamp(1rem, 1.35vw, 1.3rem); }
+
+.nu-eyebrow {
+  font-family: var(--f-display);
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+/* ── Surfaces ──────────────────────────────────────────── */
+.nu-surface {
+  background: color-mix(in oklab, var(--c-surface) calc(var(--surface-a) * 100%), transparent);
+  border: var(--bw) var(--bs) var(--c-border);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  transition: background-color .45s, border-color .45s, box-shadow .45s, border-radius .45s;
+}
+.nu-surface-2 { background: var(--c-surface-2); }
+
+.nu-section {
+  padding-block: calc(5.5rem * var(--density));
+  padding-inline: clamp(1.1rem, 5vw, 5rem);
+}
+.nu-wrap { max-width: 1240px; margin-inline: auto; width: 100%; }
+
+.nu-rule { height: var(--bw); background: var(--c-border); border: 0; }
+
+/* ── Focus ─────────────────────────────────────────────── */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Texture layers (driven by data-texture on <html>) ─── */
+.nu-texture {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  transition: opacity .8s ease;
+}
+
+html[data-texture='grid'] .nu-texture,
+html[data-texture='bento'] .nu-texture {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--c-border) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--c-border) 70%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: .8;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black, transparent 85%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black, transparent 85%);
+}
+
+html[data-texture='rules'] .nu-texture {
+  background-image: repeating-linear-gradient(
+    to bottom, transparent, transparent 47px,
+    color-mix(in oklab, var(--c-border) 55%, transparent) 47px,
+    color-mix(in oklab, var(--c-border) 55%, transparent) 48px);
+  opacity: .5;
+}
+
+html[data-texture='scanlines'] .nu-texture {
+  background-image: repeating-linear-gradient(
+    to bottom, color-mix(in oklab, var(--c-text) 7%, transparent) 0px,
+    color-mix(in oklab, var(--c-text) 7%, transparent) 1px, transparent 1px, transparent 4px);
+  opacity: .75;
+}
+
+html[data-texture='noise'] .nu-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  opacity: var(--grain);
+  mix-blend-mode: overlay;
+}
+
+html[data-texture='perspective-grid'] .nu-texture {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--c-accent) 34%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--c-accent) 34%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: perspective(300px) rotateX(62deg) scale(2.6) translateY(24%);
+  transform-origin: bottom;
+  opacity: .5;
+  -webkit-mask-image: linear-gradient(to top, black, transparent 62%);
+  mask-image: linear-gradient(to top, black, transparent 62%);
+}
+
+html[data-texture='halftone'] .nu-texture {
+  background-image: radial-gradient(color-mix(in oklab, var(--c-accent) 48%, transparent) 1.4px, transparent 1.6px);
+  background-size: 13px 13px;
+  opacity: .55;
+}
+
+html[data-texture='pixel'] .nu-texture {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--c-border) 85%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--c-border) 85%, transparent) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: .6;
+  image-rendering: pixelated;
+}
+
+html[data-texture='terrazzo'] .nu-texture {
+  background-image:
+    radial-gradient(circle at 12% 22%, var(--c-accent) 0 6px, transparent 7px),
+    radial-gradient(circle at 78% 14%, var(--c-accent-2) 0 9px, transparent 10px),
+    radial-gradient(circle at 34% 78%, var(--c-accent-2) 0 5px, transparent 6px),
+    radial-gradient(circle at 88% 66%, var(--c-accent) 0 7px, transparent 8px),
+    radial-gradient(circle at 58% 44%, var(--c-accent) 0 4px, transparent 5px);
+  background-size: 340px 340px;
+  opacity: .28;
+}
+
+html[data-texture='aurora'] .nu-texture,
+html[data-texture='mesh'] .nu-texture,
+html[data-texture='orbs'] .nu-texture,
+html[data-texture='liquid'] .nu-texture {
+  background-image:
+    radial-gradient(45rem 32rem at 12% 8%, color-mix(in oklab, var(--c-accent) 34%, transparent), transparent 62%),
+    radial-gradient(38rem 30rem at 88% 22%, color-mix(in oklab, var(--c-accent-2) 32%, transparent), transparent 60%),
+    radial-gradient(40rem 34rem at 50% 92%, color-mix(in oklab, var(--c-glow) 26%, transparent), transparent 62%);
+  filter: blur(18px);
+  animation: nu-drift 22s ease-in-out infinite alternate;
+  opacity: .9;
+}
+
+html[data-texture='sunburst'] .nu-texture {
+  background-image: repeating-conic-gradient(
+    from 0deg at 50% 118%,
+    color-mix(in oklab, var(--c-accent) 20%, transparent) 0deg 7deg,
+    transparent 7deg 14deg);
+  opacity: .5;
+}
+
+html[data-texture='shapes'] .nu-texture {
+  background-image:
+    radial-gradient(circle at 8% 16%, var(--c-accent) 0 52px, transparent 53px),
+    linear-gradient(135deg, transparent 0 70%, var(--c-accent-2) 70% 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 300px 300px;
+  background-position: 0 0, right bottom;
+  opacity: .16;
+}
+
+html[data-texture='deco'] .nu-texture {
+  background-image: repeating-linear-gradient(
+    90deg, transparent 0 78px,
+    color-mix(in oklab, var(--c-accent) 26%, transparent) 78px 80px);
+  opacity: .5;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 45%, transparent 55%, black);
+  mask-image: linear-gradient(to bottom, black, transparent 45%, transparent 55%, black);
+}
+
+html[data-texture='split'] .nu-texture {
+  background: linear-gradient(90deg, transparent 0 50%, color-mix(in oklab, var(--c-accent) 8%, transparent) 50% 100%);
+}
+
+html[data-texture='torn'] .nu-texture {
+  background-image: repeating-linear-gradient(
+    -8deg, transparent 0 120px,
+    color-mix(in oklab, var(--c-text) 4%, transparent) 120px 260px);
+  opacity: .8;
+}
+
+@keyframes nu-drift {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  50%  { transform: translate3d(2%, -2%, 0) scale(1.08); }
+  100% { transform: translate3d(-2%, 2%, 0) scale(1.04); }
+}
+
+/* ── Marquee ───────────────────────────────────────────── */
+@keyframes nu-marquee { to { transform: translateX(-50%); } }
+.nu-marquee-track {
+  display: flex; width: max-content;
+  animation: nu-marquee var(--mq-dur, 34s) linear infinite;
+}
+.nu-marquee:hover .nu-marquee-track { animation-play-state: paused; }
+
+/* ── Glitch ────────────────────────────────────────────── */
+@keyframes nu-glitch {
+  0%,100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+  20% { transform: translate(-3px, 1px); clip-path: inset(18% 0 52% 0); }
+  40% { transform: translate(3px, -1px); clip-path: inset(62% 0 18% 0); }
+  60% { transform: translate(-2px, 0); clip-path: inset(38% 0 38% 0); }
+  80% { transform: translate(2px, 1px); clip-path: inset(8% 0 72% 0); }
+}
+.nu-glitch-hover:hover { animation: nu-glitch .38s steps(2) 2; }
+
+/* ── Shine sweep ───────────────────────────────────────── */
+.nu-shine { position: relative; overflow: hidden; }
+.nu-shine::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 38%, color-mix(in oklab, white 55%, transparent) 50%, transparent 62%);
+  transform: translateX(-120%);
+  transition: transform .75s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+}
+.nu-shine:hover::after { transform: translateX(120%); }
+
+/* ── Shimmer (AI native) ───────────────────────────────── */
+@keyframes nu-shimmer { to { background-position: 200% center; } }
+.nu-shimmer-text {
+  background: linear-gradient(90deg, var(--c-text) 0%, var(--c-accent) 35%, var(--c-accent-2) 50%, var(--c-accent) 65%, var(--c-text) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  animation: nu-shimmer 4.5s linear infinite;
+}
+
+/* ── Terminal caret ────────────────────────────────────── */
+@keyframes nu-caret { 50% { opacity: 0; } }
+.nu-caret::after {
+  content: '▋'; margin-left: .12em; color: var(--c-accent);
+  animation: nu-caret 1s steps(1) infinite;
+}
+
+/* ── Underline reveal ──────────────────────────────────── */
+.nu-underline { position: relative; }
+.nu-underline::after {
+  content: ''; position: absolute; left: 0; bottom: -.14em; height: 1.5px; width: 100%;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
+  transition: transform .45s cubic-bezier(.22,1,.36,1);
+}
+.nu-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ── Magnetic / tilt containers ────────────────────────── */
+.nu-3d { transform-style: preserve-3d; perspective: 1000px; }
+
+/* ── Sticky nav blur ───────────────────────────────────── */
+.nu-nav-blur {
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+}
+
+/* ── Panel scroll area ─────────────────────────────────── */
+.nu-scroll { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+
+/* ── Chip grid ─────────────────────────────────────────── */
+.nu-swatch { width: 100%; aspect-ratio: 1; border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
