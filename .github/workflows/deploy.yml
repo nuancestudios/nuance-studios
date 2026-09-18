@@ -27,13 +27,11 @@ jobs:
 
       - run: npm ci
 
-      # Sets base to /<repo-name>/ so assets resolve on a project page.
       - name: Build
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
         run: npm run build
 
-      # Pages 404s on any path starting with an underscore without this.
       - name: Add .nojekyll
         run: touch dist/.nojekyll
 
