@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Scope from '../components/Scope'
 import { Section, SectionHead, Reveal, cx } from '../components/primitives'
+import { Parallax, ScrollScale, WordFade, DrawLine } from '../components/scroll'
 import { useTheme } from '../theme/ThemeProvider'
 import { EASE } from '../motion/variants'
 
@@ -128,7 +129,7 @@ function WorldCard({ w, active }) {
       paletteId={w.paletteId}
       fontId={w.fontId}
       className="relative overflow-hidden"
-      style={{ borderRadius: 'var(--r-lg)', border: 'var(--bw) var(--bs) var(--c-border)', minHeight: 440 }}
+      style={{ borderRadius: 'var(--r-lg)', border: 'var(--bw) var(--bs) var(--c-border)', display: 'flex', flexDirection: 'column' }}
     >
       {/* atmosphere */}
       <div
@@ -141,7 +142,7 @@ function WorldCard({ w, active }) {
         }}
       />
 
-      <div className="relative grid md:grid-cols-[1.15fr_.85fr] gap-0 h-full">
+      <div className="relative grid md:grid-cols-[1.15fr_.85fr] gap-0 flex-1 items-stretch">
         <div className="p-8 md:p-12 flex flex-col justify-center">
           <div className="nu-eyebrow mb-5">{w.kicker}</div>
           <h3 className="nu-display mb-5" style={{ fontSize: 'clamp(1.9rem, 4vw, 3.3rem)' }}>
@@ -228,6 +229,8 @@ export default function Showcase() {
         split
       />
 
+      <DrawLine className="w-full mb-8" />
+
       {/* tabs */}
       <Reveal>
         <div className="flex flex-wrap gap-1.5 mb-7">
@@ -262,10 +265,10 @@ export default function Showcase() {
         <AnimatePresence mode="wait">
           <motion.div
             key={w.key}
-            initial={{ opacity: 0, y: 26, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -18, filter: 'blur(8px)' }}
-            transition={{ duration: 0.5, ease: EASE.out }}
+            initial={{ opacity: 0, y: 34, filter: 'blur(10px)', scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+            exit={{ opacity: 0, y: -22, filter: 'blur(10px)', scale: 0.99 }}
+            transition={{ duration: 0.55, ease: EASE.out }}
           >
             <WorldCard w={w} active />
           </motion.div>
