@@ -58,10 +58,10 @@ const read = (k, fallback) => {
 export function ThemeProvider({ children }) {
   useFontLoader()
 
-  const [styleId, setStyleId] = useState(() => read('nu.style', 'editorial-print'))
-  const [paletteId, setPaletteId] = useState(() => read('nu.palette', 'bone-paper'))
+  const [styleId, setStyleId] = useState(() => read('nu.style', 'monochrome-lux'))
+  const [paletteId, setPaletteId] = useState(() => read('nu.palette', 'ink-void'))
   const [fontId, setFontId] = useState(() =>
-    read('nu.font', 'playfair-display--inter')
+    read('nu.font', 'instrument-serif--geist')
   )
   const [reduced, setReduced] = useState(false)
 
