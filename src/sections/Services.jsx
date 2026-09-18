@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Section, SectionHead, Reveal, Stagger, StaggerItem, Card, Badge, Button, Counter } from '../components/primitives'
+import { StickyCard, WordFade, ScrollCount, Parallax, DrawLine } from '../components/scroll'
 import { useTheme } from '../theme/ThemeProvider'
 import { EASE } from '../motion/variants'
 
@@ -51,33 +52,50 @@ export default function Services() {
         sub="Small studio, senior people, no account managers between you and the person doing the work."
       />
 
-      <Stagger className="grid md:grid-cols-2 gap-4 mb-20" amount={0.09}>
-        {SERVICES.map((s) => (
-          <StaggerItem key={s.n}>
-            <Card className="h-full group" tilt={style.tokens.hover === 'float3d'}>
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <span className="nu-display tabular-nums" style={{ fontSize: '2.4rem', lineHeight: 1, color: 'var(--c-accent)', opacity: 0.85 }}>
-                  {s.n}
-                </span>
-                <Badge tone="neutral">{s.time}</Badge>
+      {/* Sticky stack — each card pins, scales back and dims as the next
+          one rides over it. Scroll-linked, not triggered. */}
+      <div className="mb-24 space-y-5">
+        {SERVICES.map((s, i) => (
+          <StickyCard key={s.n} index={i} total={SERVICES.length}>
+            <div
+              className="nu-surface p-7 md:p-10 grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start"
+              style={{ background: 'var(--c-surface)' }}
+            >
+              <span
+                className="nu-display tabular-nums leading-none"
+                style={{ fontSize: 'clamp(2.4rem,5vw,4rem)', color: 'var(--c-accent)' }}
+              >
+                {s.n}
+              </span>
+
+              <div>
+                <h3 className="nu-display nu-h3 mb-3">{s.title}</h3>
+                <p className="text-[0.95rem] mb-5" style={{ color: 'var(--c-muted)', maxWidth: '52ch' }}>
+                  {s.body}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {s.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 text-[0.7rem]"
+                      style={{
+                        borderRadius: 'var(--r-sm)',
+                        background: 'var(--c-surface-2)',
+                        color: 'var(--c-muted)',
+                        fontFamily: 'var(--f-display)',
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <h3 className="nu-display nu-h3 mb-3">{s.title}</h3>
-              <p className="text-[0.92rem] mb-5" style={{ color: 'var(--c-muted)' }}>{s.body}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {s.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 text-[0.7rem]"
-                    style={{ borderRadius: 'var(--r-sm)', background: 'var(--c-surface-2)', color: 'var(--c-muted)', fontFamily: 'var(--f-display)' }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </Card>
-          </StaggerItem>
+
+              <Badge tone="neutral">{s.time}</Badge>
+            </div>
+          </StickyCard>
         ))}
-      </Stagger>
+      </div>
 
       {/* Process timeline */}
       <SectionHead eyebrow="How it goes" title="Four weeks, no mystery." />
@@ -122,9 +140,11 @@ export default function Services() {
           />
           <div className="relative">
             <span className="nu-display block mb-4" style={{ fontSize: '3.5rem', lineHeight: 0.6, color: 'var(--c-accent)' }}>“</span>
-            <blockquote className="nu-display mb-7" style={{ fontSize: 'clamp(1.25rem, 2.6vw, 2.1rem)', lineHeight: 1.25, maxWidth: '26ch', textTransform: 'none' }}>
-              We went in asking for a website and came out with a design system the whole company uses. Inbound doubled in a quarter.
-            </blockquote>
+            <WordFade
+              text="We went in asking for a website and came out with a design system the whole company uses. Inbound doubled in a quarter."
+              className="nu-display mb-7"
+              style={{ fontSize: 'clamp(1.25rem, 2.6vw, 2.1rem)', lineHeight: 1.25, maxWidth: '26ch', textTransform: 'none' }}
+            />
             <div className="flex items-center gap-3.5">
               <div
                 className="grid place-items-center text-[0.8rem] font-bold shrink-0"
