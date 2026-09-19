@@ -286,7 +286,7 @@ export default function ControlPanel() {
                           {f.displayName}
                         </div>
                         <div style={{ fontFamily: f.body, fontSize: '0.78rem', color: 'var(--c-muted)' }}>
-                          {f.bodyName} — {f.note}
+                          {f.bodyName} · {f.note}
                         </div>
                       </button>
                     ))}

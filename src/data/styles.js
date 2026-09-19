@@ -286,7 +286,7 @@ export const STYLES = [
     name: 'Layered Paper',
     era: '2016',
     group: 'Depth',
-    blurb: 'Material honesty — stacked sheets casting real shadows.',
+    blurb: 'Material honesty: stacked sheets casting real shadows.',
     tokens: S({
       radius: '6px', radiusSm: '4px', radiusLg: '10px', border: '0px',
       shadow: '0 2px 2px color-mix(in oklab, var(--c-text) 14%, transparent), 0 4px 8px color-mix(in oklab, var(--c-text) 10%, transparent)',

@@ -43,7 +43,7 @@ const WORLDS = [
     fontId: 'instrument-serif--geist',
     kicker: '03 / Depth Without Weight',
     title: 'Lit from behind.',
-    body: 'Frosted planes floating over slow-moving colour fields. Blur as hierarchy, luminance as elevation — no shadow required.',
+    body: 'Frosted planes floating over slow-moving colour fields. Blur as hierarchy, luminance as elevation. No shadow required.',
     cta: 'Enter the light',
     meta: ['Blur: 28px', 'Alpha: 0.45', 'Motion: drift'],
   },
@@ -269,7 +269,7 @@ export default function Showcase() {
 
       <Reveal delay={0.1}>
         <p className="mt-5 text-[0.8rem]" style={{ color: 'var(--c-muted)' }}>
-          Not a screenshot. Every panel is live React — same buttons, same cards, different design tokens.
+          Not a screenshot. Every panel is live React: same buttons, same cards, different design tokens.
           The whole page can do this too: open <b style={{ color: 'var(--c-text)' }}>Design Studio</b> bottom-right.
         </p>
       </Reveal>

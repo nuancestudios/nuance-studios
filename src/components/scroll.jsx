@@ -194,7 +194,7 @@ export function HoverRow({ children, className = '', onClick }) {
 /* ═══════════════════════════════════════════════════════════════
    MarqueeScroll — ticker whose direction/speed follows scroll velocity
    ═══════════════════════════════════════════════════════════════ */
-export function VelocityMarquee({ items, baseSpeed = 40, className = '', separator = '—' }) {
+export function VelocityMarquee({ items, baseSpeed = 40, className = '', separator = '·' }) {
   const { reduced } = useTheme()
   const ref = useRef(null)
   const { scrollYProgress } = useScroll()

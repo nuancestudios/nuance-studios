@@ -317,7 +317,7 @@ export function Badge({ children, tone = 'accent', className = '' }) {
 /* ═══════════════════════════════════════════════════════════════
    Marquee
    ═══════════════════════════════════════════════════════════════ */
-export function Marquee({ items, duration = 34, className = '', separator = '—' }) {
+export function Marquee({ items, duration = 34, className = '', separator = '·' }) {
   const doubled = [...items, ...items]
   return (
     <div className={cx('nu-marquee overflow-hidden', className)}>

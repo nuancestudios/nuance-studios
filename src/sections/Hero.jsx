@@ -3,11 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../theme/ThemeProvider'
 import { Reveal, SplitText } from '../components/primitives'
 import { STYLES } from '../data/styles'
-import { PALETTES } from '../data/palettes'
-import { FONT_PAIRS } from '../data/fonts'
 import { EASE } from '../motion/variants'
-
-const CLIENTS = ['Meridian', 'Kaya Labs', 'Northbound', 'Orbit&Co', 'Vellum', 'Studio Ferro', 'Halcyon', 'Praxis']
 
 /* ═══════════════════════════════════════════════════════════════
    The Specimen — the hero's signature artifact.
@@ -48,7 +44,7 @@ function Specimen() {
           className="text-[0.64rem] uppercase tracking-[0.18em] tabular-nums"
           style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', color: 'var(--c-muted)' }}
         >
-          specimen — {String(STYLES.findIndex((s) => s.id === styleId) + 1).padStart(2, '0')}/{STYLES.length}
+          specimen {String(STYLES.findIndex((s) => s.id === styleId) + 1).padStart(2, '0')}/{STYLES.length}
         </span>
       </div>
 
@@ -241,8 +237,8 @@ export default function Hero() {
                 }}
               >
                 Most studios show you a portfolio. We hand you the controls. Every
-                typeface, colour and structural decision on this page is live —
-                change it and watch the whole site re-author itself.
+                typeface, colour and structural decision on this page is live.
+                Change it and watch the whole site re-author itself.
               </p>
             </Reveal>
 
@@ -292,32 +288,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ── client strip: hairline, quiet, no marquee gimmick ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="nu-wrap w-full mt-20"
-      >
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-4 pt-7" style={{ borderTop: '1px solid var(--c-border)' }}>
-          <span
-            className="text-[0.62rem] uppercase tracking-[0.18em]"
-            style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', color: 'var(--c-muted)' }}
-          >
-            Selected clients
-          </span>
-          {CLIENTS.slice(0, 6).map((c) => (
-            <motion.span
-              key={c}
-              whileHover={{ opacity: 1, y: -1 }}
-              className="text-[0.92rem] cursor-default"
-              style={{ fontFamily: 'var(--f-display)', fontWeight: 600, color: 'var(--c-muted)', opacity: 0.55 }}
-            >
-              {c}
-            </motion.span>
-          ))}
-        </div>
-      </motion.div>
     </section>
   )
 }
