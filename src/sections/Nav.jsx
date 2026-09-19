@@ -5,9 +5,10 @@ import { Button, Magnetic, cx } from '../components/primitives'
 import { EASE } from '../motion/variants'
 
 const LINKS = [
-  { href: '#playground', label: 'Design Playground' },
   { href: '#services', label: 'Services' },
   { href: '#why', label: 'Why Us' },
+  { href: '#process', label: 'Process' },
+  { href: '#playground', label: 'Design Playground' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -64,7 +65,7 @@ export default function Nav() {
               <Magnetic key={l.href} strength={0.18}>
                 <a
                   href={l.href}
-                  className="nu-underline relative px-3.5 py-2 text-[0.84rem] transition-opacity hover:opacity-100"
+                  className="nu-underline relative px-2.5 lg:px-3.5 py-2 text-[0.84rem] transition-opacity hover:opacity-100"
                   style={{ fontFamily: 'var(--f-display)', fontWeight: 500, color: 'var(--c-muted)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-text)')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-muted)')}

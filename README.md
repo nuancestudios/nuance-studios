@@ -41,10 +41,17 @@ components/*             →  read var(--r), var(--c-accent), var(--f-display)�
 1. **Design Studio panel** (bottom-right) — search and filter all 277 options.
    The whole site morphs live, with a colour wipe on every style change.
    Selection persists in `localStorage`.
-2. **Showcase section** — nine fully-authored worlds rendered *side by side* via
-   `<Scope>`, which scopes tokens to a subtree instead of the document. Swiss,
-   Neo-Brutalist, Aurora Glass, Editorial, Cyberpunk, Claymorphism, Art Deco,
-   Memphis and Terminal — same component tree, nine design languages.
+2. **Design Playground** (`sections/Playground.jsx`, last section before the
+   contact ask) — the public half of the pitch, in two parts:
+   - *Explore the styles* — nine fully-authored worlds rendered via `<Scope>`,
+     which scopes tokens to a subtree instead of the document. Swiss,
+     Neo-Brutalist, Aurora Glass, Editorial, Cyberpunk, Claymorphism, Art Deco,
+     Memphis and Terminal — same component tree, nine design languages.
+   - *Play with the components* — 17 live bays (buttons, inputs, charts, chat,
+     pricing…) plus the catalog strip, all reading the active style's tokens.
+
+   New visitors land on the house default — **Minimal Zen · Obsidian Paper ·
+   DM Mono / DM Sans** (set in `theme/ThemeProvider.jsx`).
 
 ---
 
@@ -78,8 +85,10 @@ src/
 ├── theme/           ThemeProvider — token writer + font loader
 ├── motion/          reveal & hover variant maps
 ├── components/      primitives · Scope · ControlPanel · Cursor
-└── sections/        Nav · Hero · Playground (Showcase + Components) ·
-                     Services · Why · Contact · Footer
+└── sections/        Nav · Hero · Services · Why · Process ·
+                     Playground (Showcase + Components) · Contact · Footer
+                     — page runs in that order; the playground lands last,
+                     right before the ask.
 ```
 
 ### Adding to the system
