@@ -1,14 +1,24 @@
 import { motion } from 'framer-motion'
-import { Marquee, Reveal, Button, cx } from '../components/primitives'
+import { Marquee, Reveal, Button } from '../components/primitives'
 import { useTheme } from '../theme/ThemeProvider'
-import { STYLE_COUNT } from '../data/styles'
-import { PALETTE_COUNT } from '../data/palettes'
-import { FONT_COUNT } from '../data/fonts'
+
+const EMAIL = 'contact@nuancestudios.in'
 
 const COLS = [
-  ['Studio', ['About', 'Process', 'Careers', 'Journal']],
-  ['Services', ['Design systems', 'Websites', 'Motion', 'Analytics']],
-  ['Connect', ['Instagram', 'Dribbble', 'LinkedIn', 'GitHub']],
+  ['Studio', [
+    { label: 'About', href: '#why' },
+    { label: 'Process', href: '#process' },
+  ]],
+  ['Services', [
+    { label: 'Design systems', href: '#services' },
+    { label: 'Websites', href: '#services' },
+    { label: 'Motion', href: '#services' },
+    { label: 'Analytics', href: '#services' },
+  ]],
+  ['Connect', [
+    { label: 'Instagram', href: 'https://www.instagram.com/' },
+    { label: 'Email', href: `mailto:${EMAIL}` },
+  ]],
 ]
 
 export default function Footer() {
@@ -48,15 +58,16 @@ export default function Footer() {
               <div className="nu-eyebrow mb-4">{head}</div>
               <ul className="space-y-2.5">
                 {links.map((l) => (
-                  <li key={l}>
+                  <li key={l.label}>
                     <a
-                      href="#top"
+                      href={l.href}
+                      {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
                       className="nu-underline text-[0.88rem] inline-block transition-colors"
                       style={{ color: 'var(--c-muted)' }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-text)')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-muted)')}
                     >
-                      {l}
+                      {l.label}
                     </a>
                   </li>
                 ))}
@@ -86,7 +97,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap items-center justify-between gap-4 pt-7" style={{ borderTop: 'var(--bw) var(--bs) var(--c-border)' }}>
           <p className="text-[0.76rem]" style={{ color: 'var(--c-muted)' }}>
-            © {year} Nu.ance Studios. {STYLE_COUNT} styles · {PALETTE_COUNT} palettes · {FONT_COUNT} pairings.
+            © {year} Nu.ance Studios.
           </p>
           <p className="text-[0.76rem]" style={{ color: 'var(--c-muted)' }}>
             Rendered in <b style={{ color: 'var(--c-accent)' }}>{style.name}</b> · {style.era}

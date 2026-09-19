@@ -88,7 +88,7 @@ function AccordionDemo() {
   const items = [
     ['How fast is turnaround?', 'Most marketing sites ship in three to five weeks, design through deploy.'],
     ['Do we own the code?', 'Fully. Clean React, documented, in your repo from day one.'],
-    ['Can you match our brand?', 'Yes — or build you a new one. That is what the studio panel is for.'],
+    ['Can you match our brand?', 'Yes, or build you a new one. That is what the studio panel is for.'],
   ]
   return (
     <div className="space-y-0">

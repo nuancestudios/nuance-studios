@@ -7,11 +7,45 @@ import Services from './sections/Services'
 import Why from './sections/Why'
 import Process from './sections/Process'
 import Playground from './sections/Playground'
+import PlaygroundPage from './sections/PlaygroundPage'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import ControlPanel from './components/ControlPanel'
 import Cursor from './components/Cursor'
 import { EASE } from './motion/variants'
+
+/* ── Tiny hash router: '#/playground' opens the full Design Playground
+      on its own page; everything else stays the scrolling homepage. ── */
+const currentRoute = () =>
+  window.location.hash.startsWith('#/playground') ? 'playground' : 'home'
+
+function useHashRoute() {
+  const [route, setRoute] = useState(currentRoute)
+
+  useEffect(() => {
+    const on = () => setRoute(currentRoute())
+    window.addEventListener('hashchange', on)
+    return () => window.removeEventListener('hashchange', on)
+  }, [])
+
+  /* The browser can't scroll to home anchors while the playground page is
+     up (the targets aren't rendered yet), so we finish the job after the
+     route flips back. */
+  useEffect(() => {
+    if (route === 'playground') {
+      window.scrollTo(0, 0)
+      return
+    }
+    const id = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+    const raf = requestAnimationFrame(() => {
+      if (!id || id === 'top') window.scrollTo({ top: 0 })
+      else document.getElementById(id)?.scrollIntoView()
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [route])
+
+  return route
+}
 
 /** Opening curtain — the "page transition" on first paint. */
 function Curtain() {
@@ -94,6 +128,8 @@ function ScrollBar() {
 }
 
 function Site() {
+  const route = useHashRoute()
+
   return (
     <>
       <div className="nu-texture" aria-hidden />
@@ -102,14 +138,25 @@ function Site() {
       <Cursor />
       <ScrollBar />
       <Nav />
-      <main>
-        <Hero />
-        <Services />
-        <Why />
-        <Process />
-        <Playground />
-        <Contact />
-      </main>
+      <motion.main
+        key={route}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: EASE.out }}
+      >
+        {route === 'playground' ? (
+          <PlaygroundPage />
+        ) : (
+          <>
+            <Hero />
+            <Services />
+            <Why />
+            <Process />
+            <Playground />
+            <Contact />
+          </>
+        )}
+      </motion.main>
       <Footer />
       <ControlPanel />
     </>

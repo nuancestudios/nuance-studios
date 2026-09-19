@@ -17,6 +17,9 @@ html[data-mode='dark'] { color-scheme: dark; }
 
 html { scroll-behavior: smooth; }
 
+/* Anchor targets clear the fixed nav (About → #why, Contact → #contact, …) */
+section[id], [id].nu-section { scroll-margin-top: 5.5rem; }
+
 body {
   margin: 0;
   font-family: var(--f-body);

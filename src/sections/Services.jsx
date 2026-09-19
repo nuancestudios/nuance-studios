@@ -19,14 +19,14 @@ const SERVICES = [
   {
     n: '03',
     title: 'Motion & Interaction',
-    body: 'Framer Motion at the level people screenshot. Page transitions, scroll choreography, magnetic cursors, layout morphs — restraint included.',
+    body: 'Framer Motion at the level people screenshot. Page transitions, scroll choreography, magnetic cursors, layout morphs, restraint included.',
     tags: ['Framer Motion', 'GSAP', 'WebGL'],
     time: '1–2 weeks',
   },
   {
     n: '04',
     title: 'Performance Analytics',
-    body: 'Traffic, funnels, retention, attribution — instrumented properly and reported in plain language. We wire up the tracking, build the dashboards you will actually open, and tell you what to change next.',
+    body: 'Traffic, funnels, retention, attribution, instrumented properly and reported in plain language. We wire up the tracking, build the dashboards you will actually open, and tell you what to change next.',
     tags: ['GA4', 'Looker Studio', 'Funnels'],
     time: 'Ongoing',
   },

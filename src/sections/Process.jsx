@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { Section, SectionHead, Reveal, Stagger, StaggerItem } from '../components/primitives'
-import { WordFade } from '../components/scroll'
+import { Section, SectionHead, Stagger, StaggerItem } from '../components/primitives'
 import { EASE } from '../motion/variants'
 
 const PROCESS = [
@@ -51,43 +50,6 @@ export default function Process() {
         </Stagger>
       </div>
 
-      {/* Testimonial */}
-      <Reveal delay={0.1}>
-        <div className="mt-20 nu-surface p-8 md:p-14 relative overflow-hidden">
-          <div
-            aria-hidden className="absolute inset-0 pointer-events-none"
-            style={{ background: 'radial-gradient(34rem 22rem at 88% -20%, color-mix(in oklab, var(--c-accent) 16%, transparent), transparent 62%)' }}
-          />
-          <div className="relative">
-            <span className="nu-display block mb-4" style={{ fontSize: '3.5rem', lineHeight: 0.6, color: 'var(--c-accent)' }}>“</span>
-            <WordFade
-              text="We went in asking for a website and came out with a design system the whole company uses. Inbound doubled in a quarter."
-              className="nu-display mb-7"
-              style={{ fontSize: 'clamp(1.25rem, 2.6vw, 2.1rem)', lineHeight: 1.25, maxWidth: '26ch', textTransform: 'none' }}
-            />
-            <div className="flex items-center gap-3.5">
-              <div
-                className="grid place-items-center text-[0.8rem] font-bold shrink-0"
-                style={{ width: 44, height: 44, borderRadius: 999, background: 'var(--c-accent)', color: 'var(--c-on-accent)', fontFamily: 'var(--f-display)' }}
-              >
-                RM
-              </div>
-              <div>
-                <div className="text-[0.9rem] font-semibold" style={{ fontFamily: 'var(--f-display)' }}>Rhea Mathews</div>
-                <div className="text-[0.78rem]" style={{ color: 'var(--c-muted)' }}>Head of Brand, Meridian</div>
-              </div>
-              <div className="ml-auto hidden sm:flex items-baseline gap-6">
-                {[['2.1×', 'Inbound'], ['98', 'Lighthouse'], ['4wk', 'To ship']].map(([n, l]) => (
-                  <div key={l} className="text-right">
-                    <div className="nu-display tabular-nums" style={{ fontSize: '1.4rem', lineHeight: 1 }}>{n}</div>
-                    <div className="text-[0.65rem] uppercase tracking-[0.12em]" style={{ color: 'var(--c-muted)' }}>{l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </Reveal>
     </Section>
   )
 }

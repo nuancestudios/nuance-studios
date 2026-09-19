@@ -81,7 +81,7 @@ export default function Contact() {
           <Reveal delay={0.28}>
             <div className="space-y-px overflow-hidden mb-8" style={{ borderRadius: 'var(--r)', border: 'var(--bw) var(--bs) var(--c-border)', background: 'var(--c-border)' }}>
               {[
-                ['Email', 'creatorexchange.in@gmail.com'],
+                ['Email', 'contact@nuancestudios.in'],
                 ['Studio', 'Bengaluru · Serving worldwide'],
               ].map(([k, v]) => (
                 <motion.div
@@ -142,7 +142,7 @@ export default function Contact() {
                   </motion.div>
                   <h3 className="nu-display nu-h3 mb-2">Brief received.</h3>
                   <p className="text-[0.9rem] mb-7" style={{ color: 'var(--c-muted)' }}>
-                    We'll come back to you within one working day — usually sooner.
+                    We'll come back to you within one working day, usually sooner.
                   </p>
                   <Button variant="outline" size="sm" onClick={() => { setSent(false); setF({ name: '', email: '', brief: '' }) }}>
                     Send another

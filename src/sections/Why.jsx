@@ -12,7 +12,7 @@ const STRENGTHS = [
   {
     n: '01',
     title: 'We obsess over the details others skip.',
-    body: "From the psychology behind your colour palette to the micro-interactions on your website that make visitors stay — we analyse, iterate, and craft every element of your brand with intention. Nothing is decorative. Everything earns its place.",
+    body: "From the psychology behind your colour palette to the micro-interactions on your website that make visitors stay, we analyse, iterate, and craft every element of your brand with intention. Nothing is decorative. Everything earns its place.",
   },
   {
     n: '02',
@@ -22,7 +22,7 @@ const STRENGTHS = [
   {
     n: '03',
     title: 'We handle the whole journey.',
-    body: 'Strategy, branding, design, development, marketing — end to end. No cobbling together five freelancers and hoping they talk to each other. One team, one vision, zero gaps.',
+    body: 'Strategy, branding, design, development, marketing, end to end. No cobbling together five freelancers and hoping they talk to each other. One team, one vision, zero gaps.',
   },
   {
     n: '04',
@@ -117,7 +117,7 @@ export default function Why() {
               className="nu-display mb-7"
               style={{ fontSize: 'clamp(1.35rem, 3vw, 2.4rem)', lineHeight: 1.2, maxWidth: '28ch', textTransform: 'none' }}
             >
-              The difference between blending in and standing out is, well —{' '}
+              The difference between blending in and standing out is, well,{' '}
               <span style={{ color: 'var(--c-accent)' }}>nuance.</span>
             </motion.p>
 

@@ -29,7 +29,7 @@ const raw = [
   ['Bodoni Moda', 'Jost', 'serif', 'sans', 'Editorial', 'Vogue masthead energy.'],
 
   // — Modern Sans —
-  ['Inter Tight', 'Inter', 'sans', 'sans', 'Modern Sans', 'Optical sizing done right — one family, two voices.'],
+  ['Inter Tight', 'Inter', 'sans', 'sans', 'Modern Sans', 'Optical sizing done right: one family, two voices.'],
   ['Geist', 'Geist Mono', 'sans', 'mono', 'Modern Sans', 'The dev-tool default. Precise, cold, expensive.'],
   ['Manrope', 'Inter', 'sans', 'sans', 'Modern Sans', 'Semi-geometric headline, neutral body.'],
   ['Outfit', 'DM Sans', 'sans', 'sans', 'Modern Sans', 'Rounded geometry, soft landing.'],
