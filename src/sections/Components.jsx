@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Section, SectionHead, Reveal, Stagger, StaggerItem, Button, Card, Badge, Tilt, Magnetic, Counter, cx } from '../components/primitives'
-import { useTheme } from '../theme/ThemeProvider'
+import { Reveal, Stagger, StaggerItem, Button, Badge, Tilt, Counter, cx } from '../components/primitives'
 import { EASE } from '../motion/variants'
 
 const Label = ({ children, n }) => (
@@ -328,15 +327,8 @@ const CATALOG = [
 ]
 
 export default function Components() {
-  const { style } = useTheme()
   return (
-    <Section id="components" style={{ background: 'color-mix(in oklab, var(--c-surface) 42%, var(--c-bg))', borderBlock: 'var(--bw) var(--bs) var(--c-border)' }}>
-      <SectionHead
-        eyebrow="The kit · 100+ components"
-        title="Pre-designed. Not pre-generic."
-        sub={`Every element below is reading the ${style.name} tokens right now. Change the style and they all re-render — same props, entirely new design language. That's the difference between a component library and a template.`}
-      />
-
+    <div>
       <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" amount={0.055}>
         <Bay title="Buttons" n="8 variants">
           <div className="flex flex-wrap gap-2">
@@ -407,6 +399,6 @@ export default function Components() {
           </div>
         </div>
       </Reveal>
-    </Section>
+    </div>
   )
 }

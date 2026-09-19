@@ -8,7 +8,7 @@ const SERVICES = [
   {
     n: '01',
     title: 'Brand & Design Systems',
-    body: 'We build the vocabulary before the pages — tokens, type scale, motion rules, component grammar. The kind of system that survives a redesign.',
+    body: 'We help you build digital impact and presence, whether it is day 0 or day 100 of your business, through strong brand identity and personality.',
     tags: ['Identity', 'Tokens', 'Figma library'],
     time: '2–3 weeks',
   },
@@ -28,9 +28,9 @@ const SERVICES = [
   },
   {
     n: '04',
-    title: 'Product UI',
-    body: 'Dashboards, onboarding, settings — the unglamorous screens where most SaaS quietly loses its users. We make them a reason to stay.',
-    tags: ['Design system', 'a11y', 'Handoff'],
+    title: 'Performance Analytics',
+    body: 'Traffic, funnels, retention, attribution — instrumented properly and reported in plain language. We wire up the tracking, build the dashboards you will actually open, and tell you what to change next.',
+    tags: ['GA4', 'Looker Studio', 'Funnels'],
     time: 'Ongoing',
   },
 ]

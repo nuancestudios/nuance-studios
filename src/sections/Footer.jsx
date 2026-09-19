@@ -7,7 +7,7 @@ import { FONT_COUNT } from '../data/fonts'
 
 const COLS = [
   ['Studio', ['About', 'Process', 'Careers', 'Journal']],
-  ['Services', ['Design systems', 'Websites', 'Motion', 'Product UI']],
+  ['Services', ['Design systems', 'Websites', 'Motion', 'Analytics']],
   ['Connect', ['Instagram', 'Dribbble', 'LinkedIn', 'GitHub']],
 ]
 
@@ -18,7 +18,7 @@ export default function Footer() {
   return (
     <footer className="relative z-10" style={{ borderTop: 'var(--bw) var(--bs) var(--c-border)' }}>
       <div className="py-7" style={{ borderBottom: 'var(--bw) var(--bs) var(--c-border)', background: 'color-mix(in oklab, var(--c-surface) 40%, transparent)' }}>
-        <Marquee items={['Design systems', 'Framer Motion', 'React', 'Brand', 'Product UI', 'Nu.ance Studios']} duration={38} separator="✳" />
+        <Marquee items={['Design systems', 'Framer Motion', 'React', 'Brand', 'Performance Analytics', 'Nu.ance Studios']} duration={38} separator="✳" />
       </div>
 
       <div className="nu-wrap px-[clamp(1.1rem,5vw,5rem)] py-16">

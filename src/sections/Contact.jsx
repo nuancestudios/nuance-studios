@@ -5,7 +5,7 @@ import { useTheme } from '../theme/ThemeProvider'
 import { EASE } from '../motion/variants'
 
 const BUDGETS = ['< $5k', '$5–15k', '$15–40k', '$40k+']
-const NEEDS = ['Website', 'Design system', 'Motion pass', 'Product UI', 'Rebrand']
+const NEEDS = ['Website', 'Design system', 'Motion pass', 'Performance Analytics', 'Rebrand']
 
 function Field({ label, type = 'text', area = false, value, onChange, required }) {
   const [focus, setFocus] = useState(false)

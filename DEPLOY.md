@@ -125,7 +125,7 @@ already configured either way, so you can run both.
 - [ ] **Replace the placeholder content** — the testimonial ("Rhea Mathews, Meridian"),
       the client marquee names in `src/sections/Hero.jsx`, and the `studio@nuance.design`
       email in `Contact.jsx` and `Footer.jsx`.
-- [ ] **Check the real pricing** in the Components section demo card ($8k) — it's
+- [ ] **Check the real pricing** in the Design Playground's pricing bay ($8k) — it's
       illustrative, not an offer.
 - [ ] Optionally self-host **Geist**, **Satoshi** and **General Sans**. They aren't on
       Google Fonts, so those three pairings currently fall back to system sans.

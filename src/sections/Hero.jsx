@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../theme/ThemeProvider'
-import { Button, Reveal, SplitText, Magnetic } from '../components/primitives'
+import { Reveal, SplitText } from '../components/primitives'
 import { STYLES } from '../data/styles'
 import { PALETTES } from '../data/palettes'
 import { FONT_PAIRS } from '../data/fonts'
@@ -248,12 +248,9 @@ export default function Hero() {
 
             <Reveal delay={0.4}>
               <div className="flex flex-wrap items-center gap-3">
-                <Button as="a" href="#contact" variant="solid" size="lg" magnetic>
-                  Start a project
-                </Button>
                 <button
                   onClick={random}
-                  className="group inline-flex items-center gap-2.5 px-6 py-4 text-[0.9rem]"
+                  className="group inline-flex items-center gap-2.5 px-7 py-4 text-[0.95rem] transition-colors"
                   style={{
                     fontFamily: 'var(--f-display)',
                     fontWeight: 600,
@@ -261,6 +258,14 @@ export default function Hero() {
                     borderRadius: 'var(--r-sm)',
                     color: 'var(--c-text)',
                     background: 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--c-accent)'
+                    e.currentTarget.style.color = 'var(--c-accent)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--c-border)'
+                    e.currentTarget.style.color = 'var(--c-text)'
                   }}
                 >
                   <motion.span

@@ -1,9 +1,8 @@
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Scope from '../components/Scope'
-import { Section, SectionHead, Reveal, cx } from '../components/primitives'
-import { Parallax, ScrollScale, WordFade, DrawLine } from '../components/scroll'
-import { useTheme } from '../theme/ThemeProvider'
+import { Reveal } from '../components/primitives'
+import { DrawLine } from '../components/scroll'
 import { EASE } from '../motion/variants'
 
 /**
@@ -221,14 +220,7 @@ export default function Showcase() {
   const w = WORLDS[i]
 
   return (
-    <Section id="showcase">
-      <SectionHead
-        eyebrow="One codebase, nine dialects"
-        title="Range, demonstrated."
-        sub="Each panel below is the same component tree rendered under a different design system — its own radii, shadow logic, type scale, texture and motion personality. Click through and watch it become a different studio."
-        split
-      />
-
+    <div>
       <DrawLine className="w-full mb-8" />
 
       {/* tabs */}
@@ -281,6 +273,6 @@ export default function Showcase() {
           The whole page can do this too: open <b style={{ color: 'var(--c-text)' }}>Design Studio</b> bottom-right.
         </p>
       </Reveal>
-    </Section>
+    </div>
   )
 }

@@ -5,9 +5,9 @@ import { Button, Magnetic, cx } from '../components/primitives'
 import { EASE } from '../motion/variants'
 
 const LINKS = [
-  { href: '#showcase', label: 'Showcase' },
-  { href: '#components', label: 'Components' },
+  { href: '#playground', label: 'Design Playground' },
   { href: '#services', label: 'Services' },
+  { href: '#why', label: 'Why Us' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -77,8 +77,8 @@ export default function Nav() {
 
           <div className="flex items-center gap-2">
             <div className="hidden sm:block">
-              <Button as="a" href="#contact" variant="solid" size="sm" magnetic>
-                Start a project
+              <Button as="a" href="#contact" variant="outline" size="sm" magnetic>
+                Get in touch
               </Button>
             </div>
             <button
@@ -121,8 +121,8 @@ export default function Nav() {
                   {l.label}
                 </motion.a>
               ))}
-              <Button as="a" href="#contact" variant="solid" size="sm" className="mt-3" onClick={() => setOpen(false)}>
-                Start a project
+              <Button as="a" href="#contact" variant="outline" size="sm" className="mt-3" onClick={() => setOpen(false)}>
+                Get in touch
               </Button>
             </div>
           </motion.div>

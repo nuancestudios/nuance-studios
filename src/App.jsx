@@ -3,9 +3,9 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
 import { ThemeProvider, useTheme } from './theme/ThemeProvider'
 import Nav from './sections/Nav'
 import Hero from './sections/Hero'
-import Showcase from './sections/Showcase'
-import Components from './sections/Components'
+import Playground from './sections/Playground'
 import Services from './sections/Services'
+import Why from './sections/Why'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import ControlPanel from './components/ControlPanel'
@@ -103,9 +103,9 @@ function Site() {
       <Nav />
       <main>
         <Hero />
-        <Showcase />
-        <Components />
+        <Playground />
         <Services />
+        <Why />
         <Contact />
       </main>
       <Footer />

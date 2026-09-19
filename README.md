@@ -78,7 +78,8 @@ src/
 ├── theme/           ThemeProvider — token writer + font loader
 ├── motion/          reveal & hover variant maps
 ├── components/      primitives · Scope · ControlPanel · Cursor
-└── sections/        Nav · Hero · Showcase · Components · Services · Contact · Footer
+└── sections/        Nav · Hero · Playground (Showcase + Components) ·
+                     Services · Why · Contact · Footer
 ```
 
 ### Adding to the system
