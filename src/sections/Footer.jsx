@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Marquee, Reveal, Button } from '../components/primitives'
 import { useTheme } from '../theme/ThemeProvider'
 
-const EMAIL = 'creatorexchange.in@gmail.com'
+const EMAIL = 'contact@nuancestudios.in'
 
 const COLS = [
   ['Studio', [

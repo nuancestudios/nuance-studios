@@ -81,7 +81,7 @@ export default function Contact() {
           <Reveal delay={0.28}>
             <div className="space-y-px overflow-hidden mb-8" style={{ borderRadius: 'var(--r)', border: 'var(--bw) var(--bs) var(--c-border)', background: 'var(--c-border)' }}>
               {[
-                ['Email', 'creatorexchange.in@gmail.com'],
+                ['Email', 'contact@nuancestudios.in'],
                 ['Studio', 'Bengaluru · Serving worldwide'],
               ].map(([k, v]) => (
                 <motion.div
