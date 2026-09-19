@@ -4,8 +4,8 @@ import { Section, Reveal, Button, SplitText, Magnetic, cx } from '../components/
 import { useTheme } from '../theme/ThemeProvider'
 import { EASE } from '../motion/variants'
 
-const BUDGETS = ['< $5k', '$5–15k', '$15–40k', '$40k+']
-const NEEDS = ['Website', 'Design system', 'Motion pass', 'Product UI', 'Rebrand']
+const BUDGETS = ['< ₹10,000', '₹10,000 – ₹15,000', '₹15,000 – ₹45,000', '₹45,000+']
+const NEEDS = ['Website', 'Design system', 'Motion pass', 'Performance Analytics', 'Rebrand']
 
 function Field({ label, type = 'text', area = false, value, onChange, required }) {
   const [focus, setFocus] = useState(false)
@@ -81,9 +81,8 @@ export default function Contact() {
           <Reveal delay={0.28}>
             <div className="space-y-px overflow-hidden mb-8" style={{ borderRadius: 'var(--r)', border: 'var(--bw) var(--bs) var(--c-border)', background: 'var(--c-border)' }}>
               {[
-                ['Email', 'studio@nuance.design'],
-                ['Studio', 'Bengaluru · Remote worldwide'],
-                ['Hours', 'Mon–Fri, 10:00–19:00 IST'],
+                ['Email', 'creatorexchange.in@gmail.com'],
+                ['Studio', 'Bengaluru · Serving worldwide'],
               ].map(([k, v]) => (
                 <motion.div
                   key={k}
@@ -189,11 +188,11 @@ export default function Contact() {
 
                   <div>
                     <div className="nu-eyebrow mb-2.5">Budget range</div>
-                    <div className="grid grid-cols-4 gap-1 p-1" style={{ background: 'var(--c-surface-2)', borderRadius: 'var(--r-sm)' }}>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 p-1" style={{ background: 'var(--c-surface-2)', borderRadius: 'var(--r-sm)' }}>
                       {BUDGETS.map((b, i) => (
                         <button
                           key={b} type="button" onClick={() => setBudget(i)}
-                          className="relative py-2 text-[0.75rem] font-semibold"
+                          className="relative px-1 py-2.5 text-[0.75rem] font-semibold leading-tight text-center"
                           style={{ fontFamily: 'var(--f-display)', color: budget === i ? 'var(--c-on-accent)' : 'var(--c-muted)', zIndex: 1 }}
                         >
                           {budget === i && (

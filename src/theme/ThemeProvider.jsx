@@ -58,10 +58,13 @@ const read = (k, fallback) => {
 export function ThemeProvider({ children }) {
   useFontLoader()
 
-  const [styleId, setStyleId] = useState(() => read('nu.style', 'monochrome-lux'))
-  const [paletteId, setPaletteId] = useState(() => read('nu.palette', 'ink-void'))
+  /* House default: Minimal Zen · Obsidian Paper · DM Mono / DM Sans.
+     Anything the visitor picks in the Design Studio overrides it and
+     persists — this is only the first impression. */
+  const [styleId, setStyleId] = useState(() => read('nu.style', 'minimal-zen'))
+  const [paletteId, setPaletteId] = useState(() => read('nu.palette', 'obsidian-paper'))
   const [fontId, setFontId] = useState(() =>
-    read('nu.font', 'instrument-serif--geist')
+    read('nu.font', 'dm-mono--dm-sans')
   )
   const [reduced, setReduced] = useState(false)
 
