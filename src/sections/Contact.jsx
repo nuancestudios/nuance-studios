@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Section, Reveal, Button, SplitText, Magnetic, cx } from '../components/primitives'
 import { useTheme } from '../theme/ThemeProvider'
 import { EASE } from '../motion/variants'
+import { EMAIL, INSTAGRAM } from '../data/site'
+import { hasFormBackend, submitBrief, mailtoLink } from '../lib/contact'
 
 const BUDGETS = ['< ₹10,000', '₹10,000 – ₹15,000', '₹15,000 – ₹45,000', '₹45,000+']
 const NEEDS = ['Website', 'Design system', 'Motion pass', 'Performance Analytics', 'Rebrand']
@@ -45,13 +47,45 @@ function Field({ label, type = 'text', area = false, value, onChange, required }
 
 export default function Contact() {
   const { style, palette, font } = useTheme()
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | sent | mailto | error
+  const [error, setError] = useState('')
+  const [draft, setDraft] = useState('')
   const [f, setF] = useState({ name: '', email: '', brief: '' })
   const [budget, setBudget] = useState(1)
   const [needs, setNeeds] = useState(['Website'])
 
   const toggleNeed = (n) =>
     setNeeds((prev) => (prev.includes(n) ? prev.filter((x) => x !== n) : [...prev, n]))
+
+  const reset = () => {
+    setStatus('idle')
+    setError('')
+    setF({ name: '', email: '', brief: '' })
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (status === 'sending') return
+
+    const payload = { ...f, needs, budget }
+
+    // No backend configured yet — hand the brief to the visitor's mail app so
+    // the enquiry is never lost. Configure VITE_WEB3FORMS_KEY to send directly.
+    if (!hasFormBackend) {
+      setDraft(mailtoLink(payload))
+      setStatus('mailto')
+      return
+    }
+
+    setStatus('sending')
+    const res = await submitBrief(payload)
+    if (res.ok) {
+      setStatus('sent')
+    } else {
+      setError(res.message || 'Something went wrong.')
+      setStatus('error')
+    }
+  }
 
   return (
     <Section id="contact" style={{ background: 'color-mix(in oklab, var(--c-surface) 42%, var(--c-bg))', borderTop: 'var(--bw) var(--bs) var(--c-border)' }}>
@@ -81,9 +115,10 @@ export default function Contact() {
           <Reveal delay={0.28}>
             <div className="space-y-px overflow-hidden mb-8" style={{ borderRadius: 'var(--r)', border: 'var(--bw) var(--bs) var(--c-border)', background: 'var(--c-border)' }}>
               {[
-                ['Email', 'contact@nuancestudios.in'],
-                ['Studio', 'Bengaluru · Serving worldwide'],
-              ].map(([k, v]) => (
+                { k: 'Email', v: EMAIL, href: `mailto:${EMAIL}` },
+                { k: 'Instagram', v: '@nu.ancestudios', href: INSTAGRAM },
+                { k: 'Studio', v: 'Bengaluru · Serving worldwide' },
+              ].map(({ k, v, href }) => (
                 <motion.div
                   key={k}
                   whileHover={{ backgroundColor: 'var(--c-surface-2)' }}
@@ -91,7 +126,23 @@ export default function Contact() {
                   style={{ background: 'var(--c-surface)' }}
                 >
                   <span style={{ color: 'var(--c-muted)' }}>{k}</span>
-                  <span style={{ fontFamily: 'var(--f-display)', fontWeight: 600 }}>{v}</span>
+                  {href ? (
+                    <a
+                      href={href}
+                      {...(href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                      className="nu-underline inline-flex items-center gap-1.5 transition-colors"
+                      style={{ fontFamily: 'var(--f-display)', fontWeight: 600, color: 'var(--c-text)' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--c-accent)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--c-text)')}
+                    >
+                      {v}
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M7 17 17 7M9 7h8v8" />
+                      </svg>
+                    </a>
+                  ) : (
+                    <span style={{ fontFamily: 'var(--f-display)', fontWeight: 600 }}>{v}</span>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -124,7 +175,7 @@ export default function Contact() {
         <Reveal delay={0.12}>
           <div className="nu-surface p-6 md:p-8 relative overflow-hidden">
             <AnimatePresence mode="wait">
-              {sent ? (
+              {status === 'sent' ? (
                 <motion.div
                   key="done"
                   initial={{ opacity: 0, scale: 0.94 }}
@@ -144,15 +195,46 @@ export default function Contact() {
                   <p className="text-[0.9rem] mb-7" style={{ color: 'var(--c-muted)' }}>
                     We'll come back to you within one working day, usually sooner.
                   </p>
-                  <Button variant="outline" size="sm" onClick={() => { setSent(false); setF({ name: '', email: '', brief: '' }) }}>
+                  <Button variant="outline" size="sm" onClick={reset}>
                     Send another
                   </Button>
+                </motion.div>
+              ) : status === 'mailto' ? (
+                <motion.div
+                  key="mailto"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: EASE.out }}
+                  className="py-12 text-center"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }} animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 16, delay: 0.08 }}
+                    className="grid place-items-center mx-auto mb-6"
+                    style={{ width: 62, height: 62, borderRadius: 999, background: 'var(--c-accent)' }}
+                  >
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--c-on-accent)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5h16v14H4z" /><path d="m4 6 8 6 8-6" /></svg>
+                  </motion.div>
+                  <h3 className="nu-display nu-h3 mb-2">Your mail app should be open.</h3>
+                  <p className="text-[0.9rem] mb-7 mx-auto" style={{ color: 'var(--c-muted)', maxWidth: '38ch' }}>
+                    The brief is pre-filled — just hit send. Nothing opened? Use the button below,
+                    or write to <a href={`mailto:${EMAIL}`} className="nu-underline" style={{ color: 'var(--c-accent)' }}>{EMAIL}</a>.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    <Button as="a" href={draft} variant="solid" size="md" magnetic>
+                      Open mail draft
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setStatus('idle')}>
+                      Back to the form
+                    </Button>
+                  </div>
                 </motion.div>
               ) : (
                 <motion.form
                   key="form"
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                  onSubmit={(e) => { e.preventDefault(); setSent(true) }}
+                  onSubmit={handleSubmit}
                   className="space-y-4"
                 >
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -211,15 +293,42 @@ export default function Contact() {
 
                   <Field label="Tell us about the project" area value={f.brief} onChange={(v) => setF({ ...f, brief: v })} />
 
-                  <div className="flex items-center gap-3 pt-1">
-                    <Button type="submit" variant="solid" size="lg" magnetic>
-                      Send brief
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <Button type="submit" variant="solid" size="lg" magnetic disabled={status === 'sending'}>
+                      {status === 'sending' ? 'Sending…' : 'Send brief'}
+                      {status === 'sending' ? (
+                        <motion.svg
+                          width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round"
+                          animate={{ rotate: 360 }} transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
+                        >
+                          <path d="M12 3a9 9 0 1 0 9 9" />
+                        </motion.svg>
+                      ) : (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                      )}
                     </Button>
                     <span className="text-[0.75rem]" style={{ color: 'var(--c-muted)' }}>
                       Reply within 1 working day
                     </span>
                   </div>
+
+                  {status === 'error' && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}
+                      className="text-[0.8rem] pt-1"
+                      style={{ color: 'var(--c-text)' }}
+                    >
+                      That didn't go through{error ? ` (${error})` : ''}. Try again, or{' '}
+                      <a
+                        href={mailtoLink({ ...f, needs, budget })}
+                        className="nu-underline"
+                        style={{ color: 'var(--c-accent)', fontWeight: 600 }}
+                      >
+                        send it as an email instead
+                      </a>
+                      .
+                    </motion.p>
+                  )}
                 </motion.form>
               )}
             </AnimatePresence>

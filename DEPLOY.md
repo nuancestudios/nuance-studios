@@ -118,13 +118,16 @@ already configured either way, so you can run both.
 
 ## Before you go live
 
-- [ ] **Wire up the contact form.** It's front-end only right now — submitting shows the
-      success state but sends nothing. In `src/sections/Contact.jsx`, find the
-      `onSubmit` handler and POST to [Formspree](https://formspree.io),
-      [Resend](https://resend.com) or your own endpoint.
+- [ ] **Give the contact form a backend.** It POSTs to a hosted form service now, but
+      only once a key exists — with none set it opens a pre-filled mail draft instead.
+      Free [Web3Forms](https://web3forms.com) (250 briefs/month): get a key for
+      `contact@nuancestudios.in`, then set `VITE_WEB3FORMS_KEY` in `.env.local` and in
+      GitHub repo secrets. Full walkthrough, plus why the Google Forms API can't do
+      this: **CONTACT-SETUP.md**.
 - [ ] **Replace the placeholder content** — the testimonial ("Rhea Mathews, Meridian")
-      and the client marquee names in `src/sections/Hero.jsx`. The studio email is set
-      to `creatorexchange.in@gmail.com` in `Contact.jsx` — change it there if it moves.
+      and the client marquee names in `src/sections/Hero.jsx`. The studio email and
+      Instagram link live in `src/data/site.js` — change them there and the footer,
+      nav and contact panel follow.
 - [ ] **Check the real pricing** in the Design Playground's pricing bay ($8k) — it's
       illustrative, not an offer.
 - [ ] Optionally self-host **Geist**, **Satoshi** and **General Sans**. They aren't on

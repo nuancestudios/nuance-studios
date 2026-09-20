@@ -30,6 +30,12 @@ jobs:
       - name: Build
         env:
           VITE_BASE: /${{ github.event.repository.name }}/
+          # Contact form backend. Set the secret (Settings → Secrets and
+          # variables → Actions) and the form starts emailing the studio inbox.
+          # Leave it unset and the form falls back to a pre-filled mail draft.
+          VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+          VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
+          VITE_CONTACT_ENDPOINT: ${{ secrets.VITE_CONTACT_ENDPOINT }}
         run: npm run build
 
       - name: Add .nojekyll

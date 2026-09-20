@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { Marquee, Reveal, Button } from '../components/primitives'
 import { useTheme } from '../theme/ThemeProvider'
-
-const EMAIL = 'contact@nuancestudios.in'
+import { EMAIL, INSTAGRAM } from '../data/site'
 
 const COLS = [
   ['Studio', [
@@ -16,7 +15,7 @@ const COLS = [
     { label: 'Analytics', href: '#services' },
   ]],
   ['Connect', [
-    { label: 'Instagram', href: 'https://www.instagram.com/' },
+    { label: 'Instagram', href: INSTAGRAM },
     { label: 'Email', href: `mailto:${EMAIL}` },
   ]],
 ]
