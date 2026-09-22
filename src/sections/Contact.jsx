@@ -81,7 +81,7 @@ export default function Contact() {
           <Reveal delay={0.28}>
             <div className="space-y-px overflow-hidden mb-8" style={{ borderRadius: 'var(--r)', border: 'var(--bw) var(--bs) var(--c-border)', background: 'var(--c-border)' }}>
               {[
-                ['Email', 'contact@nuancestudios.in'],
+                ['Email', 'contact@nuancestudios.co.in'],
                 ['Studio', 'Bengaluru · Serving worldwide'],
               ].map(([k, v]) => (
                 <motion.div
@@ -91,7 +91,15 @@ export default function Contact() {
                   style={{ background: 'var(--c-surface)' }}
                 >
                   <span style={{ color: 'var(--c-muted)' }}>{k}</span>
-                  <span style={{ fontFamily: 'var(--f-display)', fontWeight: 600 }}>{v}</span>
+                  <span className="min-w-0" style={{ fontFamily: 'var(--f-display)', fontWeight: 600 }}>
+                    {k === 'Email' ? (
+                      <a href={`mailto:${v}`} className="nu-underline" style={{ color: 'inherit', overflowWrap: 'anywhere' }}>
+                        {v}
+                      </a>
+                    ) : (
+                      v
+                    )}
+                  </span>
                 </motion.div>
               ))}
             </div>

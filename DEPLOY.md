@@ -124,7 +124,7 @@ already configured either way, so you can run both.
       [Resend](https://resend.com) or your own endpoint.
 - [ ] **Replace the placeholder content** — the testimonial ("Rhea Mathews, Meridian")
       and the client marquee names in `src/sections/Hero.jsx`. The studio email is set
-      to `creatorexchange.in@gmail.com` in `Contact.jsx` — change it there if it moves.
+      to `contact@nuancestudios.co.in` in `Contact.jsx` — change it there if it moves.
 - [ ] **Check the real pricing** in the Design Playground's pricing bay ($8k) — it's
       illustrative, not an offer.
 - [ ] Optionally self-host **Geist**, **Satoshi** and **General Sans**. They aren't on

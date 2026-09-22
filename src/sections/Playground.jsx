@@ -78,7 +78,16 @@ export default function Playground() {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Button as="a" href="#/playground" variant="solid" size="lg" magnetic>
+            {/* Long label: the Button base forces whitespace-nowrap, which pushed this
+                one off-screen on phones — let it wrap below the sm breakpoint. */}
+            <Button
+              as="a"
+              href="#/playground"
+              variant="solid"
+              size="lg"
+              magnetic
+              className="!whitespace-normal sm:!whitespace-nowrap"
+            >
               Explore styles &amp; components
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </Button>
